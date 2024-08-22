@@ -15,5 +15,6 @@ namespace SignalREntites.Entites
         //
         //
         //
+        //
     }
 }
