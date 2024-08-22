@@ -13,5 +13,6 @@ namespace SignalREntites.Entites
         public string Description { get; set; }
 
         //
+        //
     }
 }
