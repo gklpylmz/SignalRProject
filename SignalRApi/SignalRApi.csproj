@@ -17,11 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\SignalRBLL\SignalRBLL.csproj" />
     <ProjectReference Include="..\SignalRDto\SignalRDto.csproj" />
   </ItemGroup>
