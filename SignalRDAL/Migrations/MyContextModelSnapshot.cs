@@ -516,6 +516,9 @@ namespace SignalRDAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
@@ -544,6 +547,8 @@ namespace SignalRDAL.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
                 });
@@ -684,10 +689,26 @@ namespace SignalRDAL.Migrations
                     b.Navigation("AppUser");
                 });
 
+            modelBuilder.Entity("SignalREntites.Entites.Product", b =>
+                {
+                    b.HasOne("SignalREntites.Entites.Category", "Category")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
             modelBuilder.Entity("SignalREntites.Entites.AppUser", b =>
                 {
                     b.Navigation("Profile")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("SignalREntites.Entites.Category", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

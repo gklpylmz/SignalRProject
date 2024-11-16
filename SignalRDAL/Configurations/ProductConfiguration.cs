@@ -13,6 +13,10 @@ namespace SignalRDAL.Configurations
         public override void Configure(EntityTypeBuilder<Product> builder)
         {
             base.Configure(builder);
+            builder
+                .HasOne(x => x.Category)
+                .WithMany(x => x.Products)
+                .HasForeignKey(x => x.CategoryId);
         }
     }
 }

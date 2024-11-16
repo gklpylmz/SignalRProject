@@ -1,4 +1,5 @@
-﻿using SignalRDAL.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using SignalRDAL.Context;
 using SignalRDAL.Repositories.Abstracts;
 using SignalREntites.Entites;
 using System;
@@ -11,8 +12,16 @@ namespace SignalRDAL.Repositories.Concretes
 {
     public class ProductRepository : BaseRepository<Product>, IProductRepository
     {
+        MyContext _db;
         public ProductRepository(MyContext db) : base(db)
         {
+            _db = db;
+        }
+
+        public List<Product> GetProductsWithCategories()
+        {
+            var values =_db.Products.Include(x=>x.Category).ToList();   
+            return values;
         }
     }
 }

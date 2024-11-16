@@ -55,5 +55,12 @@ namespace SignalRApi.Controllers
             var value = _aboutManager.FindAsync(id);
             return Ok(value);
         }
+        [HttpDelete]
+        public  async Task<IActionResult> DeleteAbout(int id)
+        {
+            var value = await _aboutManager.FindAsync(id);
+            _aboutManager.Delete(value);
+            return Ok();
+        }
     }
 }

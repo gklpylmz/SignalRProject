@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalRBLL.ManagerServices.Abstracts;
 using SignalRBLL.ManagerServices.Concretes;
@@ -13,10 +14,12 @@ namespace SignalRApi.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductManager _productManager;
+        private readonly IMapper _mapper;
 
-        public ProductController(IProductManager productManager)
+        public ProductController(IProductManager productManager, IMapper mapper)
         {
             _productManager = productManager;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -57,6 +60,12 @@ namespace SignalRApi.Controllers
         public IActionResult GetProduct(int id)
         {
             var value = _productManager.FindAsync(id);
+            return Ok(value);
+        }
+        [HttpGet("GetProductWithCategoryies")]
+        public IActionResult GetProductWithCategoryies()
+        {
+            var value = _mapper.Map<List<ResultProductWithCategory>>(_productManager.GetProductsWithCategories()); 
             return Ok(value);
         }
     }
