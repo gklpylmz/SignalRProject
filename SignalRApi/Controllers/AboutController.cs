@@ -49,8 +49,8 @@ namespace SignalRApi.Controllers
             await _aboutManager.Update(about);
             return Ok();
         }
-        [HttpGet("GetAbout")]
-        public IActionResult GetAbout(int id)
+		[HttpGet("{id}")]
+		public IActionResult GetAbout(int id)
         {
             var value = _aboutManager.FindAsync(id);
             return Ok(value);

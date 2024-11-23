@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalRBLL.ManagerServices.Abstracts;
 using SignalRBLL.ManagerServices.Concretes;
@@ -13,25 +14,23 @@ namespace SignalRApi.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryManager _categoryManager;
+        private readonly IMapper _mapper;
 
-        public CategoryController(ICategoryManager categoryManager)
+        public CategoryController(ICategoryManager categoryManager, IMapper mapper)
         {
+            _mapper = mapper;
             _categoryManager = categoryManager;
         }
         [HttpGet]
         public IActionResult CategeryList()
         {
-            var values = _categoryManager.GetAll();
+            var values = _mapper.Map<List<ResultCategoryDto>>(_categoryManager.GetAll());
             return Ok(values);
         }
         [HttpPost]
         public IActionResult CreateCategory(CreateCategoryDto createCategoryDto)
         {
-            Category category = new Category()
-            {
-                CategoryName = createCategoryDto.CategoryName,
-                CategoryDescription = createCategoryDto.CategoryDescription,
-            };
+            var category = _mapper.Map<Category>(createCategoryDto);
             _categoryManager.Add(category);
             return Ok();
         }
@@ -39,20 +38,23 @@ namespace SignalRApi.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateCategory(UpdateCategoryDto updateCategoryDto)
         {
-            Category category = new Category()
-            {
-                ID= updateCategoryDto.ID,
-                CategoryName = updateCategoryDto.CategoryName,
-                CategoryDescription = updateCategoryDto.CategoryDescription,
-            };
+            var category = _mapper.Map<Category>(updateCategoryDto);
+
             await _categoryManager.Update(category);
             return Ok();
         }
-        [HttpGet("GetAbout")]
-        public IActionResult GetCategory(int id)
+		[HttpGet("{id}")]
+		public async Task<IActionResult> GetCategory(int id)
         {
-            var value = _categoryManager.FindAsync(id);
-            return Ok(value);
+            var value = _mapper.Map<ResultCategoryDto>(await _categoryManager.FindAsync(id));
+			return Ok(value);
+        }
+		[HttpDelete]
+		public async Task<IActionResult> DeleteCategory(int id)
+        {
+            var value = await _categoryManager.FindAsync(id);
+            _categoryManager.Delete(value);
+            return Ok();
         }
     }
 }

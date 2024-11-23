@@ -1,6 +1,7 @@
 using SignalRBLL.DependencyResolvers;
 using SignalRBLL.ManagerServices.Abstracts;
 using SignalRDAL.Context;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddIdentityService();//
 builder.Services.AddDbContextService();//
 builder.Services.AddRepositoryManagerServices();//
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
