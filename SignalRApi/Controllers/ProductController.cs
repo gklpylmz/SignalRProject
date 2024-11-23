@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using SignalRBLL.ManagerServices.Abstracts;
 using SignalRBLL.ManagerServices.Concretes;
 using SignalRDto.AboutDto;
+using SignalRDto.CategoryDto;
 using SignalRDto.ProductDto;
 using SignalREntites.Entites;
 
@@ -25,42 +26,31 @@ namespace SignalRApi.Controllers
         [HttpGet]
         public IActionResult ProductList()
         {
-            var values = _productManager.GetAll();
-            return Ok(values);
+			
+			var values = _mapper.Map<List<ResultProductDto>>(_productManager.GetAll());
+			return Ok(values);
         }
         [HttpPost]
         public IActionResult CreateProduct(CreateProductDto createProductDto)
         {
-            Product product = new Product()
-            {
-                ProductName=createProductDto.ProductName,
-                Description=createProductDto.Description,
-                Price=createProductDto.Price,
-                ImageUrl=createProductDto.ImageUrl,
-            };
-            _productManager.Add(product);
+			var product = _mapper.Map<Product>(createProductDto);
+			_productManager.Add(product);
             return Ok();
         }
 
         [HttpPut]
         public async Task<IActionResult> UpdateProduct(UpdateProductDto updatePrductDto)
         {
-            Product product = new Product()
-            {
-                ID=updatePrductDto.ID,
-                ProductName = updatePrductDto.ProductName,
-                Description = updatePrductDto.Description,
-                Price = updatePrductDto.Price,
-                ImageUrl = updatePrductDto.ImageUrl,
-            };
-            await _productManager.Update(product);
-            return Ok();
-        }
-        [HttpGet("GetProduct")]
-        public IActionResult GetProduct(int id)
+			var product = _mapper.Map<Product>(updatePrductDto);
+
+			await _productManager.Update(product);
+			return Ok();
+		}
+		[HttpGet("{id}")]
+		public async Task<IActionResult> GetProduct(int id)
         {
-            var value = _productManager.FindAsync(id);
-            return Ok(value);
+			var product = _mapper.Map<ResultProductDto>(await _productManager.FindAsync(id));
+			return Ok(product);
         }
         [HttpGet("GetProductWithCategoryies")]
         public IActionResult GetProductWithCategoryies()
@@ -68,5 +58,12 @@ namespace SignalRApi.Controllers
             var value = _mapper.Map<List<ResultProductWithCategory>>(_productManager.GetProductsWithCategories()); 
             return Ok(value);
         }
-    }
+		[HttpDelete]
+		public async Task<IActionResult> DeleteProduct(int id)
+		{
+			var value = await _productManager.FindAsync(id);
+			_productManager.Delete(value);
+			return Ok();
+		}
+	}
 }
