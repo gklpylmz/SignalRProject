@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalRBLL.ManagerServices.Abstracts;
 using SignalRBLL.ManagerServices.Concretes;
@@ -13,28 +14,24 @@ namespace SignalRApi.Controllers
     public class BookingController : ControllerBase
     {
         private readonly IBookingManager _bookingManager;
+        private readonly IMapper _mapper;
 
-        public BookingController(IBookingManager bookingManager)
+        public BookingController(IBookingManager bookingManager, IMapper mapper)
         {
             _bookingManager = bookingManager;
+            _mapper = mapper;
         }
+
         [HttpGet]
         public IActionResult BookingList()
         {
-            var values = _bookingManager.GetAll();
+            var values = _mapper.Map<List<ResultBookingDto>>(_bookingManager.GetAll());
             return Ok(values);
         }
         [HttpPost]
         public IActionResult CreateBooking(CreateBookingDto createBookingDto)
         {
-            Booking booking = new Booking()
-            {
-                BookingName=createBookingDto.BookingName,
-                Phone=createBookingDto.Phone,
-                Mail=createBookingDto.Mail,
-                PersonCount=createBookingDto.PersonCount,
-                Date=createBookingDto.Date,
-            };
+            var booking = _mapper.Map<Booking>(createBookingDto);
             _bookingManager.Add(booking);
             return Ok();
         }
@@ -42,23 +39,23 @@ namespace SignalRApi.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateBooking(UpdateBookingDto updateBookingDto)
         {
-            Booking booking = new Booking()
-            {
-                ID=updateBookingDto.ID,
-                BookingName = updateBookingDto.BookingName,
-                Phone = updateBookingDto.Phone,
-                Mail = updateBookingDto.Mail,
-                PersonCount = updateBookingDto.PersonCount,
-                Date = updateBookingDto.Date,
-            };
+            var booking = _mapper.Map<Booking>(updateBookingDto);
+
             await _bookingManager.Update(booking);
             return Ok();
         }
-        [HttpGet("GetAbout")]
-        public IActionResult GetBooking(int id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetBooking(int id)
         {
-            var value = _bookingManager.FindAsync(id);
+            var value = _mapper.Map<ResultBookingDto>(await _bookingManager.FindAsync(id));
             return Ok(value);
+        }
+        [HttpDelete]
+        public async Task<IActionResult> DeleteBooking(int id)
+        {
+            var value = await _bookingManager.FindAsync(id);
+            _bookingManager.Delete(value);
+            return Ok();
         }
     }
 }

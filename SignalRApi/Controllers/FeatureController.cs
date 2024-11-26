@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalRBLL.ManagerServices.Abstracts;
 using SignalRBLL.ManagerServices.Concretes;
@@ -13,30 +14,24 @@ namespace SignalRApi.Controllers
     public class FeatureController : ControllerBase
     {
         private readonly IFeatureManager _featureManager;
+        private readonly IMapper _mapper;
 
-        public FeatureController(IFeatureManager featureManager)
+        public FeatureController(IFeatureManager featureManager, IMapper mapper)
         {
             _featureManager = featureManager;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public IActionResult FeatureList()
         {
-            var values = _featureManager.GetAll();
+            var values = _mapper.Map<List<ResultFeatureDto>>(_featureManager.GetAll());
             return Ok(values);
         }
         [HttpPost]
         public IActionResult CreateFeature(CreateFeatureDto createFeatureDto)
         {
-            Feature feature = new Feature()
-            {
-                Title1=createFeatureDto.Title1,
-                Description1 = createFeatureDto.Description1,
-                Title2 = createFeatureDto.Title2,
-                Description2 = createFeatureDto.Description2,
-                Title3 = createFeatureDto.Title3,
-                Description3= createFeatureDto.Description3,
-            };
+            var feature = _mapper.Map<Feature>(createFeatureDto);
             _featureManager.Add(feature);
             return Ok();
         }
@@ -44,24 +39,23 @@ namespace SignalRApi.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateFeature(UpdateFeatureDto updateFeatureDto)
         {
-            Feature feature = new Feature()
-            {
-                ID= updateFeatureDto.ID,
-                Title1 = updateFeatureDto.Title1,
-                Description1 = updateFeatureDto.Description1,
-                Title2 = updateFeatureDto.Title2,
-                Description2 = updateFeatureDto.Description2,
-                Title3 = updateFeatureDto.Title3,
-                Description3 = updateFeatureDto.Description3,
-            };
+            var feature = _mapper.Map<Feature>(updateFeatureDto);
+
             await _featureManager.Update(feature);
             return Ok();
         }
-        [HttpGet("GetFeature")]
-        public IActionResult GetFeature(int id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetFeature(int id)
         {
-            var value = _featureManager.FindAsync(id);
+            var value = _mapper.Map<ResultFeatureDto>(await _featureManager.FindAsync(id));
             return Ok(value);
+        }
+        [HttpDelete]
+        public async Task<IActionResult> DeleteFeature(int id)
+        {
+            var value = await _featureManager.FindAsync(id);
+            _featureManager.Delete(value);
+            return Ok();
         }
     }
 }

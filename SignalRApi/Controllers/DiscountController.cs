@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalRBLL.ManagerServices.Abstracts;
 using SignalRBLL.ManagerServices.Concretes;
@@ -13,28 +14,24 @@ namespace SignalRApi.Controllers
     public class DiscountController : ControllerBase
     {
         private readonly IDiscountManager _discountManager;
+        private readonly IMapper _mapper;
 
-        public DiscountController(IDiscountManager discountManager)
+        public DiscountController(IDiscountManager discountManager, IMapper mapper)
         {
             _discountManager = discountManager;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public IActionResult DiscountList()
         {
-            var values = _discountManager.GetAll();
+            var values = _mapper.Map<List<ResultDiscountDto>>(_discountManager.GetAll());
             return Ok(values);
         }
         [HttpPost]
         public IActionResult CreateDiscount(CreateDiscountDto createDiscountDto)
         {
-            Discount discount = new Discount()
-            {
-               Title= createDiscountDto.Title,
-               Amount= createDiscountDto.Amount,
-               Description= createDiscountDto.Description,
-               ImageUrl= createDiscountDto.ImageUrl,
-            };
+            var discount = _mapper.Map<Discount>(createDiscountDto);
             _discountManager.Add(discount);
             return Ok();
         }
@@ -42,22 +39,23 @@ namespace SignalRApi.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateDiscount(UpdateDiscountDto updateDiscountDto)
         {
-            Discount discount = new Discount()
-            {
-                ID= updateDiscountDto.ID,
-                Title = updateDiscountDto.Title,
-                Amount = updateDiscountDto.Amount,
-                Description = updateDiscountDto.Description,
-                ImageUrl = updateDiscountDto.ImageUrl,
-            };
+            var discount = _mapper.Map<Discount>(updateDiscountDto);
+
             await _discountManager.Update(discount);
             return Ok();
         }
-        [HttpGet("GetDiscount")]
-        public IActionResult GetDiscount(int id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetDiscount(int id)
         {
-            var value = _discountManager.FindAsync(id);
+            var value = _mapper.Map<ResultDiscountDto>(await _discountManager.FindAsync(id));
             return Ok(value);
+        }
+        [HttpDelete]
+        public async Task<IActionResult> DeleteDiscount(int id)
+        {
+            var value = await _discountManager.FindAsync(id);
+            _discountManager.Delete(value);
+            return Ok();
         }
     }
 }
