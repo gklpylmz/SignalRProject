@@ -9,5 +9,6 @@ namespace SignalRBLL.ManagerServices.Abstracts
 {
     public interface ICategoryManager:IManager<Category>
     {
+        public int GetCategoryCount();
     }
 }

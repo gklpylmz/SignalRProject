@@ -10,5 +10,6 @@ namespace SignalRBLL.ManagerServices.Abstracts
     public interface IProductManager:IManager<Product>
     {
         List<Product> GetProductsWithCategories();
+        public int GetProductCount();
     }
 }

@@ -10,5 +10,6 @@ namespace SignalRDAL.Repositories.Abstracts
     public interface IProductRepository:IRepository<Product>
     {
         List<Product> GetProductsWithCategories();
+        public int GetProductCount();
     }
 }

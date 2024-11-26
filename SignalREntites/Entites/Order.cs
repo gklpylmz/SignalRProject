@@ -6,15 +6,12 @@ using System.Threading.Tasks;
 
 namespace SignalREntites.Entites
 {
-    public class Product :BaseEntity
+    public class Order:BaseEntity
     {
-        public string ProductName { get; set; }
+        public string TableNumber { get; set; }
         public string Description { get; set; }
-        public decimal Price { get; set; }
-        public string ImageUrl { get; set; }
-
-        public int CategoryId { get; set; }
-        public virtual Category Category { get; set; }
+        public DateTime Date { get; set; }
+        public decimal TotalPrice { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

@@ -18,6 +18,11 @@ namespace SignalRDAL.Repositories.Concretes
             _db = db;
         }
 
+        public int GetProductCount()
+        {
+            return _db.Products.Count();
+        }
+
         public List<Product> GetProductsWithCategories()
         {
             var values =_db.Products.Include(x=>x.Category).ToList();   

@@ -11,8 +11,15 @@ namespace SignalRDAL.Repositories.Concretes
 {
     public class CategoryRepository : BaseRepository<Category>, ICategoryRepository
     {
+        MyContext _db;
         public CategoryRepository(MyContext db) : base(db)
         {
+            _db = db;
+        }
+
+        public int GetCategoryCount()
+        {
+            return _db.Categories.Count();
         }
     }
 }

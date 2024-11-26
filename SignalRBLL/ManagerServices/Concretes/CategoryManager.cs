@@ -17,5 +17,10 @@ namespace SignalRBLL.ManagerServices.Concretes
         {
             _categoryRepository = categoryRepository;
         }
+
+        public int GetCategoryCount()
+        {
+            return _categoryRepository.GetCategoryCount();
+        }
     }
 }

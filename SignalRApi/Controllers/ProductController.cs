@@ -52,6 +52,11 @@ namespace SignalRApi.Controllers
 			var product = _mapper.Map<ResultProductDto>(await _productManager.FindAsync(id));
 			return Ok(product);
         }
+        [HttpGet("ProductCount")]
+        public IActionResult GetProductCount()
+        {
+            return Ok(_productManager.GetProductCount());
+        }
         [HttpGet("GetProductWithCategoryies")]
         public IActionResult GetProductWithCategoryies()
         {

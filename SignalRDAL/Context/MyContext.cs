@@ -32,6 +32,7 @@ namespace SignalRDAL.Context
             builder.ApplyConfiguration(new ProductConfiguration());
             builder.ApplyConfiguration(new SocialMediaConfiguration());
             builder.ApplyConfiguration(new TestimonialConfiguration());
+            builder.ApplyConfiguration(new MoneyCaseConfiguration());
         }
 
         public DbSet<AppUser> AppUsers { get; set; }
@@ -45,5 +46,6 @@ namespace SignalRDAL.Context
         public DbSet<Product> Products { get; set; }
         public DbSet<SocialMedia> SocialMedias { get; set; }
         public DbSet<Testimonial> Testimonials { get; set; }
+        public DbSet<MoneyCase> MoneyCases { get; set; }
     }
 }

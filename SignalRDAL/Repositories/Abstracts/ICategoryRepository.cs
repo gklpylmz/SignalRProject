@@ -9,5 +9,6 @@ namespace SignalRDAL.Repositories.Abstracts
 {
     public interface ICategoryRepository:IRepository<Category>
     {
+        public int GetCategoryCount();
     }
 }

@@ -49,7 +49,12 @@ namespace SignalRApi.Controllers
             var value = _mapper.Map<ResultCategoryDto>(await _categoryManager.FindAsync(id));
 			return Ok(value);
         }
-		[HttpDelete]
+        [HttpGet("CategoryCount")]
+        public IActionResult GetCategoryCount()
+        {
+            return Ok(_categoryManager.GetCategoryCount());
+        }
+        [HttpDelete]
 		public async Task<IActionResult> DeleteCategory(int id)
         {
             var value = await _categoryManager.FindAsync(id);
