@@ -37,6 +37,14 @@ namespace SignalRBLL.DependencyResolvers
             services.AddScoped<ISocialMediaManager, SocialMediaManager>();
             services.AddScoped<ITestimonialRepository, TestimonialRepository>();
             services.AddScoped<ITestimonialManager, TestimonialManager>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrderManager, OrderManager>();
+            services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
+            services.AddScoped<IOrderDetailManager, OrderDetailManager>();
+            services.AddScoped<IMoneyCase, MoneyCaseRepository>();
+            services.AddScoped<IMoneyCasesManager, MoneyCasesManager>();
+            services.AddScoped<IMenuTableRepository, MenuTableRepository>();
+            services.AddScoped<IMenuTableManager, MenuTableManager>();
 
 
 
