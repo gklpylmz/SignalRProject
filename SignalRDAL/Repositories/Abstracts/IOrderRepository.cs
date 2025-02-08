@@ -9,5 +9,9 @@ namespace SignalRDAL.Repositories.Abstracts
 {
     public interface IOrderRepository:IRepository<Order>
     {
+        int TotalOrderCount();
+        int ActiveTotalOrderCount();
+        decimal LastOrderPrice();
+        decimal TodayOrderPrice();
     }
 }

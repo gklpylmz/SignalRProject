@@ -9,5 +9,9 @@ namespace SignalRBLL.ManagerServices.Abstracts
 {
     public interface IOrderManager:IManager<Order>
     {
+        int TotalOrderCount();
+        int ActiveTotalOrderCount();
+        decimal LastOrderPrice();
+        decimal TodayOrderPrice();
     }
 }

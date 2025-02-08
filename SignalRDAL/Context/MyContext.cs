@@ -36,6 +36,7 @@ namespace SignalRDAL.Context
             builder.ApplyConfiguration(new OrderDetailConfiguration());
             builder.ApplyConfiguration(new OrderConfiguration());
             builder.ApplyConfiguration(new MenuTableConfiguration());
+            builder.ApplyConfiguration(new SliderConfiguration());
         }
 
         public DbSet<AppUser> AppUsers { get; set; }
@@ -53,5 +54,6 @@ namespace SignalRDAL.Context
         public DbSet<OrderDetail> OrderDetail { get; set; }
         public DbSet<Order> Order { get; set; }
         public DbSet<MenuTable> MenuTables { get; set; }
+        public DbSet<Slider> Sliders { get; set; }
     }
 }

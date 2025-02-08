@@ -17,5 +17,25 @@ namespace SignalRBLL.ManagerServices.Concretes
         {
             _orderRepository = orderRepository;
         }
+
+        public int ActiveTotalOrderCount()
+        {
+            return _orderRepository.ActiveTotalOrderCount();
+        }
+
+        public decimal LastOrderPrice()
+        {
+            return _orderRepository.LastOrderPrice();
+        }
+
+        public decimal TodayOrderPrice()
+        {
+            return _orderRepository.TodayOrderPrice();
+        }
+
+        public int TotalOrderCount()
+        {
+            return _orderRepository.TotalOrderCount();
+        }
     }
 }

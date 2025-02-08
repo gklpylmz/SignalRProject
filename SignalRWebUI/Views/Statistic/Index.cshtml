@@ -7,7 +7,7 @@
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
-<script src="~/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
 
 <div class="content">
     <div class="container-fluid">
@@ -17,7 +17,7 @@
 
             $(document).ready(() => {
 
-                var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7186/SignalRHub").build();
+                var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:44383/SignalRHub").build();
                 $("#connstatus").text(connection.state);
                 connection.start().then(() => {
                     $("#connstatus").text(connection.state);
@@ -27,45 +27,45 @@
                 }).catch((err) => { console.log(err) });
 
 
-                connection.on("ReceiveCategoryCount", (value) => {
+                connection.on("RecieveCategoryCount", (value) => {
                     $("#categorycount").text(value);
                 });
 
-                connection.on("ReceiveProductCount", (value2) => {
+                connection.on("RecieveProductCount", (value2) => {
                     $("#productcount").text(value2);
                 });
 
-                connection.on("ReceiveActiveCategoryCount", (value3) => {
-                    $("#activecategorycount").text(value3);
-                });
+                // connection.on("ReceiveActiveCategoryCount", (value3) => {
+                //     $("#activecategorycount").text(value3);
+                // });
 
-                connection.on("ReceivePassiveCategoryCount", (value4) => {
-                    $("#passivecategorycount").text(value4);
-                });
+                // connection.on("ReceivePassiveCategoryCount", (value4) => {
+                //     $("#passivecategorycount").text(value4);
+                // });
 
-                connection.on("ReceiveProductCountByCategoryNameHamburger", (value5) => {
-                    $("#productcountbycategorynamehamburger").text(value5);
-                });
+                // connection.on("ReceiveProductCountByCategoryNameHamburger", (value5) => {
+                //     $("#productcountbycategorynamehamburger").text(value5);
+                // });
 
-                connection.on("ReceiveProductCountByCategoryNameDrink", (value6) => {
-                    $("#receiveproductcountbycategorynamedrink").text(value6);
-                });
+                // connection.on("ReceiveProductCountByCategoryNameDrink", (value6) => {
+                //     $("#receiveproductcountbycategorynamedrink").text(value6);
+                // });
 
-                connection.on("ReceiveProductPriceAvg", (value7) => {
-                    $("#receiveproductpriceavg").text(value7);
-                });
+                // connection.on("ReceiveProductPriceAvg", (value7) => {
+                //     $("#receiveproductpriceavg").text(value7);
+                // });
 
-                connection.on("ReceiveProductNameByMaxPrice", (value8) => {
-                    $("#productnamebymaxprice").text(value8);
-                });
+                // connection.on("ReceiveProductNameByMaxPrice", (value8) => {
+                //     $("#productnamebymaxprice").text(value8);
+                // });
 
-                connection.on("ReceiveProductNameByMinPrice", (value9) => {
-                    $("#productnamebyminprice").text(value9);
-                });
+                // connection.on("ReceiveProductNameByMinPrice", (value9) => {
+                //     $("#productnamebyminprice").text(value9);
+                // });
 
-                connection.on("ReceiveProductAvgPriceByHamburger", (value10) => {
-                    $("#productavgpricebyhamburger").text(value10);
-                });
+                // connection.on("ReceiveProductAvgPriceByHamburger", (value10) => {
+                //     $("#productavgpricebyhamburger").text(value10);
+                // });
 
                 connection.on("ReceiveTotalOrderCount", (value11) => {
                     $("#totalordercount").text(value11);

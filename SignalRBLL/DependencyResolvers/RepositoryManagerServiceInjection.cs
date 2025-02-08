@@ -45,6 +45,8 @@ namespace SignalRBLL.DependencyResolvers
             services.AddScoped<IMoneyCasesManager, MoneyCasesManager>();
             services.AddScoped<IMenuTableRepository, MenuTableRepository>();
             services.AddScoped<IMenuTableManager, MenuTableManager>();
+            services.AddScoped<ISliderRepository, SliderRepository>();
+            services.AddScoped<ISliderManager, SliderManager>();
 
 
 
