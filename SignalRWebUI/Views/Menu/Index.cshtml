@@ -23,7 +23,7 @@
             </div>
 
 
-            @await Component.InvokeAsync("_MenuCategoryFilterComponentPartial")
+            @* @await Component.InvokeAsync("_MenuCategoryFilterComponentPartial") *@
 
 
 
@@ -122,14 +122,14 @@
 
     @await Component.InvokeAsync("_UILayoutFooterComponentPartial")
 
-    @await Component.InvokeAsync("_UILayoutScriptComponentPartial")
+    @await Component.InvokeAsync("_UILayoutScriptsComponentPartial")
 
     <script>
 
         function showproductid(productId, menuTableId) {
             $.ajax({
                 type: 'POST',
-                url: "/Menu/AddBasket",
+                url: "/Menu/AddShoppingCart",
                 data: {
                     id: productId,
                     menuTableId: menuTableId // MenuTableId burada gönderiliyor

@@ -16,5 +16,6 @@ namespace SignalREntites.Entites
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; }
     }
 }

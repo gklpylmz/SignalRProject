@@ -9,5 +9,7 @@ namespace SignalREntites.Entites
     public class MenuTable : BaseEntity
     {
         public string Name { get; set; }
+
+        public virtual List<ShoppingCart> ShoppingCarts { get; set; }
     }
 }
