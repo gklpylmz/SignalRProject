@@ -26,7 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SignalRBLL\SignalRBLL.csproj" />
     <ProjectReference Include="..\SignalRDto\SignalRDto.csproj" />
+    <ProjectReference Include="..\SignalREntites\SignalREntites.csproj" />
   </ItemGroup>
 
   <ItemGroup>

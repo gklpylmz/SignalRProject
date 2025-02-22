@@ -11,13 +11,14 @@ namespace SignalREntites.Entites
 {
     public class AppUser : IdentityUser<int>, IEntity
     {
-        public int ID { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public DateTime CreatedDate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public DateTime? ModifiedDate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public DateTime? DeletedDate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public DataStatus Status { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
 
         //Relational Prop
         public virtual AppUserProfile Profile { get; set; }
+        public int ID { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime? ModifiedDate { get; set; }
+        public DateTime? DeletedDate { get; set; }
+        public DataStatus Status { get; set; }
     }
 }

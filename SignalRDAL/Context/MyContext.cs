@@ -38,6 +38,7 @@ namespace SignalRDAL.Context
             builder.ApplyConfiguration(new MenuTableConfiguration());
             builder.ApplyConfiguration(new SliderConfiguration());
             builder.ApplyConfiguration(new ShoppingCartConfiguration());
+            builder.ApplyConfiguration(new NotificationConfiguration());
         }
 
         public DbSet<AppUser> AppUsers { get; set; }
@@ -57,5 +58,6 @@ namespace SignalRDAL.Context
         public DbSet<MenuTable> MenuTables { get; set; }
         public DbSet<Slider> Sliders { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
     }
 }

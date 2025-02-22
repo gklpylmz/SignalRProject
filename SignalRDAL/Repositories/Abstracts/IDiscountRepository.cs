@@ -9,5 +9,7 @@ namespace SignalRDAL.Repositories.Abstracts
 {
     public interface IDiscountRepository:IRepository<Discount>
     {
+        void ChangeDiscountStatusToTrue(int id);
+        void ChangeDiscountStatusToFalse(int id);
     }
 }

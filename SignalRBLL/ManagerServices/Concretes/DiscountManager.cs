@@ -17,5 +17,15 @@ namespace SignalRBLL.ManagerServices.Concretes
         {
             _discountRepository = discountRepository;
         }
-    }
+
+		public void ChangeDiscountStatusToFalse(int id)
+		{
+			_discountRepository.ChangeDiscountStatusToFalse(id);
+		}
+
+		public void ChangeDiscountStatusToTrue(int id)
+		{
+			_discountRepository.ChangeDiscountStatusToTrue(id);
+		}
+	}
 }

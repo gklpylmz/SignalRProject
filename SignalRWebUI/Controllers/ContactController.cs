@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using SignalRWebUI.DTOs.ContactDtos;
+using SignalRDto.ContactDto;
 using System.Text;
 
 namespace SignalRWebUI.Controllers
@@ -64,16 +64,16 @@ namespace SignalRWebUI.Controllers
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<UpdateContactdTO>(jsonData);
+                var values = JsonConvert.DeserializeObject<UpdateContactDto>(jsonData);
                 return View(values);
             }
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateContact(UpdateContactdTO updateContactdTO)
+        public async Task<IActionResult> UpdateContact(UpdateContactDto updateContactDto)
         {
             var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(updateContactdTO);
+            var jsonData = JsonConvert.SerializeObject(updateContactDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
             var responseMessage = await client.PutAsync("https://localhost:44383/api/Contact", stringContent);
             if (responseMessage.IsSuccessStatusCode)

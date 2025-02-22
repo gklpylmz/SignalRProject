@@ -25,7 +25,7 @@ namespace SignalRApi.Controllers
         [HttpGet]
         public IActionResult DiscountList()
         {
-            var values = _mapper.Map<List<ResultDiscountDto>>(_discountManager.GetAll());
+            var values = _mapper.Map<List<ResultDiscountDto>>(_discountManager.GetAll().Where(x=>x.Status !=SignalREntites.Enums.DataStatus.Deleted));
             return Ok(values);
         }
         [HttpPost]
@@ -57,5 +57,17 @@ namespace SignalRApi.Controllers
             _discountManager.Delete(value);
             return Ok();
         }
-    }
+		[HttpGet("ChangeDiscountStatusToTrue/{id}")]
+		public IActionResult ChangeDiscountStatusToTrue(int id)
+		{
+            _discountManager.ChangeDiscountStatusToTrue(id);
+            return Ok();
+		}
+		[HttpGet("ChangeDiscountStatusToFalse/{id}")]
+		public IActionResult ChangeDiscountStatusToFalse(int id)
+		{
+			_discountManager.ChangeDiscountStatusToFalse(id);
+			return Ok();
+		}
+	}
 }

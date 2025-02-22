@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using SignalRWebUI.DTOs.ContactDtos;
+using SignalRDto.ContactDto;
+
 
 namespace SignalRWebUI.ViewComponents.UILayoutComponents
 {

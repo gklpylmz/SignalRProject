@@ -49,6 +49,8 @@ namespace SignalRBLL.DependencyResolvers
             services.AddScoped<ISliderManager, SliderManager>();
             services.AddScoped<IShoppingCartRepository, ShoppingCartRepository>();
             services.AddScoped<IShoppingCartManager, ShoppingCartManager>();
+            services.AddScoped<INotificationRepository, NotificationRepository>();
+            services.AddScoped<INotificationManager, NotificationManager>();
 
 
 

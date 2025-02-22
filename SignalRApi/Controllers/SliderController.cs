@@ -27,5 +27,35 @@ namespace SignalRApi.Controllers
             return Ok(values);
         }
         
+        [HttpPost]
+        public IActionResult CreateSlider(CreateSliderDto createSliderDto)
+        {
+            var slider = _mapper.Map<Slider>(createSliderDto);
+            _sliderManager.Add(slider);
+            return Ok();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateSlider(UpdateSliderDto updateSliderDto)
+        {
+            var slider = _mapper.Map<Slider>(updateSliderDto);
+
+            await _sliderManager.Update(slider);
+            return Ok();
+        }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetSlider(int id)
+        {
+            var value = _mapper.Map<ResultSliderDto>(await _sliderManager.FindAsync(id));
+            return Ok(value);
+        }
+        [HttpDelete]
+        public async Task<IActionResult> DeleteSlider(int id)
+        {
+            var value = await _sliderManager.FindAsync(id);
+            _sliderManager.Delete(value);
+            return Ok();
+        }
+
     }
 }

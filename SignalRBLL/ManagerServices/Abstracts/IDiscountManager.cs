@@ -9,5 +9,7 @@ namespace SignalRBLL.ManagerServices.Abstracts
 {
     public interface IDiscountManager:IManager<Discount>
     {
-    }
+		void ChangeDiscountStatusToTrue(int id);
+		void ChangeDiscountStatusToFalse(int id);
+	}
 }

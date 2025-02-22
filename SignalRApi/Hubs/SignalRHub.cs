@@ -11,14 +11,19 @@ namespace SignalRApi.Hubs
         private readonly IOrderManager _orderManager;
         private readonly IOrderDetailManager _orderDetailManager;
         private readonly IMoneyCasesManager _moneyCasesManager;
+        private readonly INotificationManager _notificationManager;
+        private readonly IMenuTableManager _menuTableManager;
 
-        public SignalRHub(ICategoryManager categoryManager, IProductManager productManager, IOrderManager orderManager, IOrderDetailManager orderDetailManager, IMoneyCasesManager moneyCasesManager)
+        public SignalRHub(ICategoryManager categoryManager, IProductManager productManager, IOrderManager orderManager, IOrderDetailManager orderDetailManager, IMoneyCasesManager moneyCasesManager, INotificationManager notificationManager, IMenuTableManager menuTableManager)
         {
+
             _categoryManager = categoryManager;
             _productManager = productManager;
             _orderManager = orderManager;
             _orderDetailManager = orderDetailManager;
             _moneyCasesManager = moneyCasesManager;
+            _notificationManager = notificationManager;
+            _menuTableManager = menuTableManager;
         }
         public async Task SendStatistic()
         {
@@ -49,5 +54,18 @@ namespace SignalRApi.Hubs
             await Clients.All.SendAsync("ReceiveActiveOrderCount", value2);
         }
 
+        public async Task SendNotifications()
+        {
+            var value = _notificationManager.GetPassiveNotificationCount();
+            await Clients.All.SendAsync("ReceivePassiveNotificationCount", value);
+
+            var value1 = _notificationManager.GetPassiveNotifications();
+            await Clients.All.SendAsync("ReceivePassiveNotifications", value);
+        }
+        public async Task GetMenuTableStatus()
+        {
+            var value = _menuTableManager.GetAll();
+            await Clients.All.SendAsync("ReceiveMenuTableStatus", value);
+        }
     }
 }
