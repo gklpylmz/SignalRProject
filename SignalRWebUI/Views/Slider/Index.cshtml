@@ -1,4 +1,4 @@
-﻿@model List<SignalRWebUI.DTOs.FeatureDtos.ResultFeatureDto>
+﻿@model List<SignalRDto.SliderDto.ResultSliderDto>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/AdminLayoutController1/Index.cshtml";
@@ -43,13 +43,13 @@
 										<td>@item.Description2</td>
 										<td>@item.Title3</td>
 										<td>@item.Description3</td>
-										<td><a href="/Feature/DeleteFeature/@item.ID" class="btn btn-outline-danger">Sil</a></td>
-										<td><a href="/Feature/UpdateFeautre/@item.ID" class="btn btn-outline-success">Güncelle</a></td>
+										<td><a href="/Slider/DeleteSlider/@item.ID" class="btn btn-outline-danger">Sil</a></td>
+										<td><a href="/Slider/UpdateSlider/@item.ID" class="btn btn-outline-success">Güncelle</a></td>
 									</tr>
 								}
 							</tbody>
 						</table>
-						<a href="/Feature/CreateFeature/" class="btn btn-outline-primary">Yeni Kategori Girişi</a>
+						<a href="/Slider/CreateSlider/" class="btn btn-outline-primary">Yeni Slider Girişi</a>
 					</div>
 				</div>
 			</div>
