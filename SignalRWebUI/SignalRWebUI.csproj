@@ -23,12 +23,19 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.18" />
+    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SignalRBLL\SignalRBLL.csproj" />
     <ProjectReference Include="..\SignalRDto\SignalRDto.csproj" />
     <ProjectReference Include="..\SignalREntites\SignalREntites.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="QRCoder">
+      <HintPath>..\..\..\..\OneDrive\Desktop\QRCoder.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
