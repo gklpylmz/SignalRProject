@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using SignalRWebUI.DTOs.CategoryDtos;
@@ -7,6 +8,7 @@ using System.Text;
 
 namespace SignalRWebUI.Controllers
 {
+	[AllowAnonymous]
 	public class ProductController : Controller
 	{
 		private readonly IHttpClientFactory _httpClientFactory;
@@ -54,7 +56,7 @@ namespace SignalRWebUI.Controllers
 			var responseMessage = await client.PostAsync("https://localhost:44383/api/Product", stringContent);
 			if (responseMessage.IsSuccessStatusCode)
 			{
-				return RedirectToAction("Index", "Category");
+				return RedirectToAction("Index", "Product");
 			}
 			return View();
 		}
@@ -104,7 +106,7 @@ namespace SignalRWebUI.Controllers
 			var responseMessage = await client.PutAsync("https://localhost:44383/api/Product", stringContent);
 			if (responseMessage.IsSuccessStatusCode)
 			{
-				return RedirectToAction("Index", "Category");
+				return RedirectToAction("Index", "Product");
 			}
 			return View();
 		}

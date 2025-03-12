@@ -28,5 +28,14 @@ namespace SignalRDAL.Repositories.Concretes
             var values =_db.Products.Include(x=>x.Category).ToList();   
             return values;
         }
-    }
+
+		public List<Product> GetRandomNineProduct()
+		{
+            var values = _db.Products.
+                OrderBy(x => EF.Functions.Random())
+                .Take(9)
+                .ToList();
+            return values;  
+		}
+	}
 }

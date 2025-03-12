@@ -27,5 +27,10 @@ namespace SignalRBLL.ManagerServices.Concretes
         {
             return _productRepository.GetProductsWithCategories();
         }
-    }
+
+		public List<Product> GetRandomNineProduct()
+		{
+			return _productRepository.GetRandomNineProduct();
+		}
+	}
 }

@@ -11,5 +11,6 @@ namespace SignalRDAL.Repositories.Abstracts
     {
         List<Product> GetProductsWithCategories();
         public int GetProductCount();
+        List<Product> GetRandomNineProduct();  
     }
 }

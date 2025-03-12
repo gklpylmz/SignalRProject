@@ -70,5 +70,11 @@ namespace SignalRApi.Controllers
 			_productManager.Delete(value);
 			return Ok();
 		}
+		[HttpGet("GetRandomNineProduct")]
+		public IActionResult GetRandomNineProduct()
+		{
+			var product = _mapper.Map<List<ResultProductDto>>(_productManager.GetRandomNineProduct());
+			return Ok(product);
+		}
 	}
 }

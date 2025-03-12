@@ -11,5 +11,6 @@ namespace SignalRBLL.ManagerServices.Abstracts
     {
         List<Product> GetProductsWithCategories();
         public int GetProductCount();
-    }
+		List<Product> GetRandomNineProduct();
+	}
 }

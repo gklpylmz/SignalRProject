@@ -22,7 +22,7 @@ namespace SignalRApi.Controllers
         [HttpGet]
         public IActionResult MenuTableList()
         {
-            var values = _mapper.Map<List<ResultMenuTableDto>>(_menuTableManager.GetAll());
+            var values = _menuTableManager.GetAll();
             return Ok(values);
         }
         [HttpPost]
